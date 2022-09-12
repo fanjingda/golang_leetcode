@@ -1,0 +1,70 @@
+/**
+ * 前序遍历
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func preorderTraversal(root *TreeNode) (vals []int) {
+    var preorder func(*TreeNode)
+    preorder = func(node *TreeNode) {
+        if node == nil {
+            return
+        }
+        vals = append(vals, node.Val)
+        preorder(node.Left)
+        preorder(node.Right)
+    }
+    preorder(root)
+    return
+}
+
+
+/**
+ * 中序遍历
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func inorderTraversal(root *TreeNode) (res []int) {
+	var inorder func(node *TreeNode)
+	inorder = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		inorder(node.Left)
+		res = append(res, node.Val)
+		inorder(node.Right)
+	}
+	inorder(root)
+	return
+}
+
+
+/**
+ * 后序遍历
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func postorderTraversal(root *TreeNode) (res[]int) {
+    var postorder func(node *TreeNode)
+    postorder = func(node *TreeNode){
+        if node == nil{
+            return 
+        }
+        postorder(node.Left)
+        postorder(node.Right)
+        res = append(res, node.Val)
+    }
+    postorder(root)
+    return res
+}
