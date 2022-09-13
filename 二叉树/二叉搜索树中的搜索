@@ -1,0 +1,31 @@
+二叉搜索树满足如下性质：
+左子树所有节点的元素值均小于根的元素值；
+右子树所有节点的元素值均大于根的元素值。
+据此可以得到如下算法：
+
+若 root 为空则返回空节点；
+1、若 val=root.val则返回 root
+2、若 val<root.val递归左子树
+3、若 val>root.val递归右子树
+
+
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func searchBST(root *TreeNode, val int) *TreeNode {
+    if root == nil {
+        return nil
+    }
+    if val == root.Val {
+        return root
+    }
+    if val < root.Val {
+        return searchBST(root.Left, val)
+    }
+    return searchBST(root.Right, val)
+}
