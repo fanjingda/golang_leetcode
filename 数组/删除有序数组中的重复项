@@ -1,0 +1,27 @@
+/**
+这道题目的要求是：对给定的有序数组 \textit{nums}nums 删除重复元素，在删除重复元素之后，每个元素只出现一次，并返回新的长度，
+上述操作必须通过原地修改数组的方法，使用 O(1)O(1) 的空间复杂度完成。
+由于给定的数组nums 是有序的，因此对于任意i<j，如果nums[i]=nums[j]，则对任意i≤k≤j，必有nums[i]=nums[k]=nums[j]，
+即相等的元素在数组中的下标一定是连续的。利用数组有序的特点，可以通过双指针的方法删除重复元素。
+如果数组nums 的长度为0，则数组不包含任何元素，因此返回0。
+当数组nums 的长度大于0时，数组中至少包含一个元素，在删除重复元素之后也至少剩下一个元素，因此nums[0] 保持原状即可，从下标 1开始删除重复元素。
+定义两个指针fast 和slow 分别为快指针和慢指针，快指针表示遍历数组到达的下标位置，慢指针表示下一个不同元素要填入的下标位置，初始时两个指针都指向下标1。
+假设数组 nums 的长度为n。将快指针fast 依次遍历从1到n−1 的每个位置，对于每个位置，如果nums[fast] =nums[fast−1]，说明 ums[fast] 和之前的元素都不同，
+因此将nums[fast] 的值复制到nums[slow]，然后将slow 的值加1，即指向下一个位置。
+遍历结束之后，从nums[0]到nums[slow−1] 的每个元素都不相同且包含原数组中的每个不同的元素，因此新的长度即为slow，返回slow 即可。
+*/
+
+func removeDuplicates(nums []int) int {
+    n := len(nums)
+    if n == 0 {
+        return 0
+    }
+    slow := 1
+    for fast := 1; fast < n; fast++ {
+        if nums[fast] != nums[fast-1] {
+            nums[slow] = nums[fast]
+            slow++
+        }
+    }
+    return slow
+}
