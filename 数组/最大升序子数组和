@@ -1,0 +1,17 @@
+func maxAscendingSum(nums []int) int {
+  n :=len(nums)
+  dp:=make([]int,n)
+  res:=nums[0]
+  dp[0] = res
+	for i := 1; i < n; i++ {
+		if nums[i-1]<nums[i]{
+			dp[i] = nums[i]+dp[i-1]
+		}else{
+			dp[i] = nums[i]
+		}
+		res = int(math.Max(float64(dp[i]),float64(res)))
+	}
+	return res
+}
+
+//用一个数组记录之前的值，对于（i+1）和（i）位置的值来说，如果后面的值大，就需要加上num[i],否则当前值就是nums[i+1]
